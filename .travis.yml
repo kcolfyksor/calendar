@@ -4,8 +4,7 @@ sudo: false
 
 notifications:
   email:
-    - yiminghe@gmail.com
-    - hust2012jiangkai@gmail.com
+    - b3n.lwk@gmail.com
 
 node_js:
   - 10
