@@ -1,5 +1,5 @@
-import React from 'react';
-import { getTodayTimeStr, getTodayTime, isAllowedDate } from '../util/';
+import React from "react";
+import { getTodayTimeStr, getTodayTime, isAllowedDate } from "../util/";
 
 export default function TodayButton({
   prefixCls,
@@ -9,14 +9,15 @@ export default function TodayButton({
   disabled,
   disabledDate,
   onToday,
-  text,
+  text
 }) {
   const localeNow = (!text && timePicker ? locale.now : text) || locale.today;
   const disabledToday =
-          disabledDate && !isAllowedDate(getTodayTime(value), disabledDate);
+    disabledDate && !isAllowedDate(getTodayTime(value), disabledDate);
   const isDisabled = disabledToday || disabled;
-  const disabledTodayClass = isDisabled ?
-          `${prefixCls}-today-btn-disabled` : '';
+  const disabledTodayClass = isDisabled
+    ? `${prefixCls}-today-btn-disabled`
+    : "";
   return (
     <a
       className={`${prefixCls}-today-btn ${disabledTodayClass}`}
