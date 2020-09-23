@@ -22,9 +22,13 @@ class MonthCalendar extends React.Component {
     selectedValue: PropTypes.object,
     defaultSelectedValue: PropTypes.object,
     disabledDate: PropTypes.func,
-  }
+  };
 
-  static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
+  static defaultProps = Object.assign(
+    {},
+    defaultProp,
+    calendarMixinDefaultProps
+  );
 
   constructor(props) {
     super(props);
@@ -36,7 +40,7 @@ class MonthCalendar extends React.Component {
     };
   }
 
-  onKeyDown = (event) => {
+  onKeyDown = event => {
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
@@ -81,13 +85,13 @@ class MonthCalendar extends React.Component {
       event.preventDefault();
       return 1;
     }
-  }
+  };
 
   handlePanelChange = (_, mode) => {
     if (mode !== 'date') {
       this.setState({ mode });
     }
-  }
+  };
 
   render() {
     const { props, state } = this;
@@ -121,4 +125,6 @@ class MonthCalendar extends React.Component {
   }
 }
 
-export default polyfill(calendarMixinWrapper(commonMixinWrapper(MonthCalendar)));
+export default polyfill(
+  calendarMixinWrapper(commonMixinWrapper(MonthCalendar))
+);
