@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { getMonthName } from "../util";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { getMonthName } from '../util';
 
-function noop() {}
+function noop() { }
 
 class CalendarHeader extends Component {
   onYearChange(year) {
@@ -31,7 +31,7 @@ class CalendarHeader extends Component {
         className={`${prefixCls}-header-year-select`}
         onChange={this.onYearChange.bind(this)}
         dropdownStyle={{ zIndex: 2000 }}
-        dropdownMenuStyle={{ maxHeight: 250, overflow: "auto", fontSize: 12 }}
+        dropdownMenuStyle={{ maxHeight: 250, overflow: 'auto', fontSize: 12 }}
         optionLabelProp="children"
         value={String(year)}
         showSearch={false}
@@ -61,9 +61,9 @@ class CalendarHeader extends Component {
         dropdownStyle={{ zIndex: 2000 }}
         dropdownMenuStyle={{
           maxHeight: 250,
-          overflow: "auto",
-          overflowX: "hidden",
-          fontSize: 12
+          overflow: 'auto',
+          overflowX: 'hidden',
+          fontSize: 12,
         }}
         optionLabelProp="children"
         value={String(month)}
@@ -76,11 +76,11 @@ class CalendarHeader extends Component {
   }
 
   changeTypeToDate() {
-    this.props.onTypeChange("date");
+    this.props.onTypeChange('date');
   }
 
   changeTypeToMonth() {
-    this.props.onTypeChange("month");
+    this.props.onTypeChange('month');
   }
 
   render() {
@@ -90,36 +90,36 @@ class CalendarHeader extends Component {
       prefixCls,
       type,
       showTypeSwitch,
-      headerComponents
+      headerComponents,
     } = this.props;
     const year = value.year();
     const month = value.month();
     const yearSelect = this.yearSelectElement(year);
     const monthSelect =
-      type === "month" ? null : this.monthSelectElement(month);
+      type === 'month' ? null : this.monthSelectElement(month);
     const switchCls = `${prefixCls}-header-switcher`;
     const typeSwitcher = showTypeSwitch ? (
       <span className={switchCls}>
-        {type === "date" ? (
+        {type === 'date' ? (
           <span className={`${switchCls}-focus`}>{locale.month}</span>
         ) : (
-          <span
-            onClick={this.changeTypeToDate.bind(this)}
-            className={`${switchCls}-normal`}
-          >
-            {locale.month}
-          </span>
-        )}
-        {type === "month" ? (
+            <span
+              onClick={this.changeTypeToDate.bind(this)}
+              className={`${switchCls}-normal`}
+            >
+              {locale.month}
+            </span>
+          )}
+        {type === 'month' ? (
           <span className={`${switchCls}-focus`}>{locale.year}</span>
         ) : (
-          <span
-            onClick={this.changeTypeToMonth.bind(this)}
-            className={`${switchCls}-normal`}
-          >
-            {locale.year}
-          </span>
-        )}
+            <span
+              onClick={this.changeTypeToMonth.bind(this)}
+              className={`${switchCls}-normal`}
+            >
+              {locale.year}
+            </span>
+          )}
       </span>
     ) : null;
 
@@ -144,13 +144,13 @@ CalendarHeader.propTypes = {
   prefixCls: PropTypes.string,
   type: PropTypes.string,
   showTypeSwitch: PropTypes.bool,
-  headerComponents: PropTypes.array
+  headerComponents: PropTypes.array,
 };
 CalendarHeader.defaultProps = {
   yearSelectOffset: 10,
   yearSelectTotal: 20,
   onValueChange: noop,
-  onTypeChange: noop
+  onTypeChange: noop,
 };
 
 export default CalendarHeader;

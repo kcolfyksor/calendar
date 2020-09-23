@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function OkButton({ prefixCls, locale, okDisabled, onOk }) {
   let className = `${prefixCls}-ok-btn`;

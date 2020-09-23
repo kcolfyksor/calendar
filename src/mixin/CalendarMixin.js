@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import moment from "moment";
-import { isAllowedDate, getTodayTime } from "../util/index";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import moment from 'moment';
+import { isAllowedDate, getTodayTime } from '../util/index';
 
-function noop() {}
+function noop() { }
 
 export function getNowByCurrentStateValue(value) {
   let ret;
@@ -19,16 +19,16 @@ export function getNowByCurrentStateValue(value) {
 export const calendarMixinPropTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
-  onKeyDown: PropTypes.func
+  onKeyDown: PropTypes.func,
 };
 
 export const calendarMixinDefaultProps = {
-  onKeyDown: noop
+  onKeyDown: noop,
 };
 
 export const calendarMixinWrapper = ComposeComponent =>
   class extends ComposeComponent {
-    static displayName = "CalendarMixinWrapper";
+    static displayName = 'CalendarMixinWrapper';
     static defaultProps = ComposeComponent.defaultProps;
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -40,13 +40,13 @@ export const calendarMixinWrapper = ComposeComponent =>
       const { value, selectedValue } = nextProps;
       const newState = {};
 
-      if ("value" in nextProps) {
+      if ('value' in nextProps) {
         newState.value =
           value ||
           nextProps.defaultValue ||
           getNowByCurrentStateValue(prevState.value);
       }
-      if ("selectedValue" in nextProps) {
+      if ('selectedValue' in nextProps) {
         newState.selectedValue = selectedValue;
       }
 
@@ -68,7 +68,7 @@ export const calendarMixinWrapper = ComposeComponent =>
         [prefixCls]: 1,
         [`${prefixCls}-hidden`]: !props.visible,
         [props.className]: !!props.className,
-        [newProps.className]: !!newProps.className
+        [newProps.className]: !!newProps.className,
       };
 
       return (
@@ -87,9 +87,9 @@ export const calendarMixinWrapper = ComposeComponent =>
 
     setSelectedValue = (selectedValue, cause) => {
       // if (this.isAllowedDate(selectedValue)) {
-      if (!("selectedValue" in this.props)) {
+      if (!('selectedValue' in this.props)) {
         this.setState({
-          selectedValue
+          selectedValue,
         });
       }
       if (this.props.onSelect) {
@@ -100,9 +100,9 @@ export const calendarMixinWrapper = ComposeComponent =>
 
     setValue = value => {
       const originalValue = this.state.value;
-      if (!("value" in this.props)) {
+      if (!('value' in this.props)) {
         this.setState({
-          value
+          value,
         });
       }
       if (

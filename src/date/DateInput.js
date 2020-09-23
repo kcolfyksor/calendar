@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import KeyCode from "rc-util/lib/KeyCode";
-import { polyfill } from "react-lifecycles-compat";
-import moment from "moment";
-import { formatDate } from "../util";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import KeyCode from 'rc-util/lib/KeyCode';
+import { polyfill } from 'react-lifecycles-compat';
+import moment from 'moment';
+import { formatDate } from '../util';
 
 let cachedSelectionStart;
 let cachedSelectionEnd;
@@ -18,7 +18,7 @@ class DateInput extends React.Component {
     disabledTime: PropTypes.any,
     format: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
+      PropTypes.arrayOf(PropTypes.string),
     ]),
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
@@ -28,7 +28,7 @@ class DateInput extends React.Component {
     onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.node,
-    inputMode: PropTypes.string
+    inputMode: PropTypes.string,
   };
 
   constructor(props) {
@@ -38,7 +38,7 @@ class DateInput extends React.Component {
     this.state = {
       str: formatDate(selectedValue, this.props.format),
       invalid: false,
-      hasFocus: false
+      hasFocus: false,
     };
   }
 
@@ -58,7 +58,7 @@ class DateInput extends React.Component {
 
   onClear = () => {
     this.setState({
-      str: ""
+      str: '',
     });
     this.props.onClear(null);
   };
@@ -72,7 +72,7 @@ class DateInput extends React.Component {
       onChange(null);
       this.setState({
         invalid: false,
-        str
+        str,
       });
       return;
     }
@@ -82,7 +82,7 @@ class DateInput extends React.Component {
     if (!parsed.isValid()) {
       this.setState({
         invalid: true,
-        str
+        str,
       });
       return;
     }
@@ -99,7 +99,7 @@ class DateInput extends React.Component {
     if (!value || (disabledDate && disabledDate(value))) {
       this.setState({
         invalid: true,
-        str
+        str,
       });
       return;
     }
@@ -110,7 +110,7 @@ class DateInput extends React.Component {
     ) {
       this.setState({
         invalid: false,
-        str
+        str,
       });
       onChange(value);
     }
@@ -123,7 +123,7 @@ class DateInput extends React.Component {
   onBlur = () => {
     this.setState((prevState, prevProps) => ({
       hasFocus: false,
-      str: formatDate(prevProps.value, prevProps.format)
+      str: formatDate(prevProps.value, prevProps.format),
     }));
   };
 
@@ -151,7 +151,7 @@ class DateInput extends React.Component {
     if (!state.hasFocus) {
       newState = {
         str: formatDate(selectedValue, nextProps.format),
-        invalid: false
+        invalid: false,
       };
     }
 
@@ -180,7 +180,7 @@ class DateInput extends React.Component {
     const props = this.props;
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
-    const invalidClass = invalid ? `${prefixCls}-input-invalid` : "";
+    const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
         <div className={`${prefixCls}-date-input-wrap`}>

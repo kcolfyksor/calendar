@@ -1,5 +1,5 @@
-import React from "react";
-import classnames from "classnames";
+import React from 'react';
+import classnames from 'classnames';
 
 export default function TimePickerButton({
   prefixCls,
@@ -7,11 +7,11 @@ export default function TimePickerButton({
   showTimePicker,
   onOpenTimePicker,
   onCloseTimePicker,
-  timePickerDisabled
+  timePickerDisabled,
 }) {
   const className = classnames({
     [`${prefixCls}-time-picker-btn`]: true,
-    [`${prefixCls}-time-picker-btn-disabled`]: timePickerDisabled
+    [`${prefixCls}-time-picker-btn-disabled`]: timePickerDisabled,
   });
   let onClick = null;
   if (!timePickerDisabled) {

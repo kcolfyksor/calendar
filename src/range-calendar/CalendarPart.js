@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import CalendarHeader from "../calendar/CalendarHeader";
-import DateTable from "../date/DateTable";
-import DateInput from "../date/DateInput";
-import { getTimeConfig } from "../util/index";
+import React from 'react';
+import PropTypes from 'prop-types';
+import CalendarHeader from '../calendar/CalendarHeader';
+import DateTable from '../date/DateTable';
+import DateInput from '../date/DateInput';
+import { getTimeConfig } from '../util/index';
 
 export default class CalendarPart extends React.Component {
   static propTypes = {
@@ -27,7 +27,7 @@ export default class CalendarPart extends React.Component {
     enablePrev: PropTypes.any,
     clearIcon: PropTypes.node,
     dateRender: PropTypes.func,
-    inputMode: PropTypes.string
+    inputMode: PropTypes.string,
   };
 
   render() {
@@ -53,7 +53,7 @@ export default class CalendarPart extends React.Component {
       enableNext,
       clearIcon,
       showClear,
-      inputMode
+      inputMode,
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig =
@@ -65,9 +65,9 @@ export default class CalendarPart extends React.Component {
       locale,
       value,
       prefixCls,
-      showTimePicker
+      showTimePicker,
     };
-    const index = direction === "left" ? 0 : 1;
+    const index = direction === 'left' ? 0 : 1;
     const timePickerEle =
       shouldShowTimePicker &&
       React.cloneElement(timePicker, {
@@ -79,7 +79,7 @@ export default class CalendarPart extends React.Component {
         ...timePickerDisabledTime,
         onChange: onInputChange,
         defaultOpenValue: value,
-        value: selectedValue[index]
+        value: selectedValue[index],
       });
 
     const dateInputElement = props.showDateInput && (
@@ -104,7 +104,7 @@ export default class CalendarPart extends React.Component {
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
         {dateInputElement}
-        <div style={{ outline: "none" }}>
+        <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}
             mode={mode}

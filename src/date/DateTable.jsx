@@ -1,6 +1,6 @@
-import React from "react";
-import DateTHead from "./DateTHead";
-import DateTBody from "./DateTBody";
+import React from 'react';
+import DateTHead from './DateTHead';
+import DateTBody from './DateTBody';
 
 export default class DateTable extends React.Component {
   render() {

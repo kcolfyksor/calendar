@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
-import DateConstants from "./DateConstants";
-import { getTitleString, getTodayTime } from "../util/";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import DateConstants from './DateConstants';
+import { getTitleString, getTodayTime } from '../util/';
 
 function isSameDay(one, two) {
   return one && two && one.isSame(two, "day");
@@ -34,15 +34,15 @@ export default class DateTBody extends React.Component {
     prefixCls: PropTypes.string,
     selectedValue: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.arrayOf(PropTypes.object)
+      PropTypes.arrayOf(PropTypes.object),
     ]),
     value: PropTypes.object,
     hoverValue: PropTypes.any,
-    showWeekNumber: PropTypes.bool
+    showWeekNumber: PropTypes.bool,
   };
 
   static defaultProps = {
-    hoverValue: []
+    hoverValue: [],
   };
 
   render() {
@@ -55,7 +55,7 @@ export default class DateTBody extends React.Component {
       showWeekNumber,
       dateRender,
       disabledDate,
-      hoverValue
+      hoverValue,
     } = props;
     let iIndex;
     let jIndex;
@@ -84,7 +84,7 @@ export default class DateTBody extends React.Component {
       (day + 7 - value.localeData().firstDayOfWeek()) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
-    lastMonth1.add(0 - lastMonthDiffDay, "days");
+    lastMonth1.add(0 - lastMonthDiffDay, 'days');
     let passed = 0;
 
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
@@ -92,7 +92,7 @@ export default class DateTBody extends React.Component {
         current = lastMonth1;
         if (passed) {
           current = current.clone();
-          current.add(passed, "days");
+          current.add(passed, 'days');
         }
         dateTable.push(current);
         passed++;
@@ -158,17 +158,17 @@ export default class DateTBody extends React.Component {
                 cls += ` ${selectedEndDateClass}`;
               } else if (
                 (startValue === null || startValue === undefined) &&
-                current.isBefore(endValue, "day")
+                current.isBefore(endValue, 'day')
               ) {
                 cls += ` ${inRangeClass}`;
               } else if (
                 (endValue === null || endValue === undefined) &&
-                current.isAfter(startValue, "day")
+                current.isAfter(startValue, 'day')
               ) {
                 cls += ` ${inRangeClass}`;
               } else if (
-                current.isAfter(startValue, "day") &&
-                current.isBefore(endValue, "day")
+                current.isAfter(startValue, 'day') &&
+                current.isBefore(endValue, 'day')
               ) {
                 cls += ` ${inRangeClass}`;
               }
@@ -195,7 +195,7 @@ export default class DateTBody extends React.Component {
         if (
           current
             .clone()
-            .endOf("month")
+            .endOf('month')
             .date() === current.date()
         ) {
           cls += ` ${lastDayOfMonthClass}`;
@@ -250,7 +250,7 @@ export default class DateTBody extends React.Component {
               disabled
                 ? undefined
                 : (props.onDayHover && props.onDayHover.bind(null, current)) ||
-                  undefined
+                undefined
             }
             role="gridcell"
             title={getTitleString(current)}
@@ -269,7 +269,7 @@ export default class DateTBody extends React.Component {
           role="row"
           className={cx({
             [`${prefixCls}-current-week`]: isCurrentWeek,
-            [`${prefixCls}-active-week`]: isActiveWeek
+            [`${prefixCls}-active-week`]: isActiveWeek,
           })}
         >
           {weekNumberCell}

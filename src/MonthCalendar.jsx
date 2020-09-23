@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import KeyCode from "rc-util/lib/KeyCode";
-import { polyfill } from "react-lifecycles-compat";
-import CalendarHeader from "./calendar/CalendarHeader";
-import CalendarFooter from "./calendar/CalendarFooter";
+import React from 'react';
+import PropTypes from 'prop-types';
+import KeyCode from 'rc-util/lib/KeyCode';
+import { polyfill } from 'react-lifecycles-compat';
+import CalendarHeader from './calendar/CalendarHeader';
+import CalendarFooter from './calendar/CalendarFooter';
 import {
   calendarMixinWrapper,
   calendarMixinPropTypes,
-  calendarMixinDefaultProps
-} from "./mixin/CalendarMixin";
-import { commonMixinWrapper, propType, defaultProp } from "./mixin/CommonMixin";
-import moment from "moment";
+  calendarMixinDefaultProps,
+} from './mixin/CalendarMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import moment from 'moment';
 
 class MonthCalendar extends React.Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class MonthCalendar extends React.Component {
     defaultValue: PropTypes.object,
     selectedValue: PropTypes.object,
     defaultSelectedValue: PropTypes.object,
-    disabledDate: PropTypes.func
+    disabledDate: PropTypes.func,
   };
 
   static defaultProps = Object.assign(
@@ -34,9 +34,9 @@ class MonthCalendar extends React.Component {
     super(props);
 
     this.state = {
-      mode: "month",
+      mode: 'month',
       value: props.value || props.defaultValue || moment(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   }
 
@@ -49,26 +49,26 @@ class MonthCalendar extends React.Component {
     switch (keyCode) {
       case KeyCode.DOWN:
         value = stateValue.clone();
-        value.add(3, "months");
+        value.add(3, 'months');
         break;
       case KeyCode.UP:
         value = stateValue.clone();
-        value.add(-3, "months");
+        value.add(-3, 'months');
         break;
       case KeyCode.LEFT:
         value = stateValue.clone();
         if (ctrlKey) {
-          value.add(-1, "years");
+          value.add(-1, 'years');
         } else {
-          value.add(-1, "months");
+          value.add(-1, 'months');
         }
         break;
       case KeyCode.RIGHT:
         value = stateValue.clone();
         if (ctrlKey) {
-          value.add(1, "years");
+          value.add(1, 'years');
         } else {
-          value.add(1, "months");
+          value.add(1, 'months');
         }
         break;
       case KeyCode.ENTER:
@@ -88,7 +88,7 @@ class MonthCalendar extends React.Component {
   };
 
   handlePanelChange = (_, mode) => {
-    if (mode !== "date") {
+    if (mode !== 'date') {
       this.setState({ mode });
     }
   };
@@ -120,7 +120,7 @@ class MonthCalendar extends React.Component {
     );
     return this.renderRoot({
       className: `${props.prefixCls}-month-calendar`,
-      children
+      children,
     });
   }
 }

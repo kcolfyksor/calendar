@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import toFragment from "rc-util/lib/Children/mapSelf";
-import MonthPanel from "../month/MonthPanel";
-import YearPanel from "../year/YearPanel";
-import DecadePanel from "../decade/DecadePanel";
+import React from 'react';
+import PropTypes from 'prop-types';
+import toFragment from 'rc-util/lib/Children/mapSelf';
+import MonthPanel from '../month/MonthPanel';
+import YearPanel from '../year/YearPanel';
+import DecadePanel from '../decade/DecadePanel';
 
 function goMonth(direction) {
   const next = this.props.value.clone();
-  next.add(direction, "months");
+  next.add(direction, 'months');
   this.props.onValueChange(next);
 }
 
 function goYear(direction) {
   const next = this.props.value.clone();
-  next.add(direction, "years");
+  next.add(direction, 'years');
   this.props.onValueChange(next);
 }
 
@@ -33,14 +33,14 @@ export default class CalendarHeader extends React.Component {
     enableNext: PropTypes.any,
     disabledMonth: PropTypes.func,
     renderFooter: PropTypes.func,
-    onMonthSelect: PropTypes.func
+    onMonthSelect: PropTypes.func,
   };
 
   static defaultProps = {
     enableNext: 1,
     enablePrev: 1,
-    onPanelChange() {},
-    onValueChange() {}
+    onPanelChange() { },
+    onValueChange() { },
   };
 
   constructor(props) {
@@ -55,7 +55,7 @@ export default class CalendarHeader extends React.Component {
   }
 
   onMonthSelect = value => {
-    this.props.onPanelChange(value, "date");
+    this.props.onPanelChange(value, 'date');
     if (this.props.onMonthSelect) {
       this.props.onMonthSelect(value);
     } else {
@@ -71,7 +71,7 @@ export default class CalendarHeader extends React.Component {
   };
 
   onDecadeSelect = value => {
-    this.props.onPanelChange(value, "year");
+    this.props.onPanelChange(value, 'year');
     this.props.onValueChange(value);
   };
 
@@ -91,14 +91,14 @@ export default class CalendarHeader extends React.Component {
     const localeData = value.localeData();
     const monthBeforeYear = locale.monthBeforeYear;
     const selectClassName = `${prefixCls}-${
-      monthBeforeYear ? "my-select" : "ym-select"
-    }`;
-    const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : "";
+      monthBeforeYear ? 'my-select' : 'ym-select'
+      }`;
+    const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : '';
     const year = (
       <a
         className={`${prefixCls}-year-select${timeClassName}`}
         role="button"
-        onClick={showTimePicker ? null : () => this.showYearPanel("date")}
+        onClick={showTimePicker ? null : () => this.showYearPanel('date')}
         title={showTimePicker ? null : locale.yearSelect}
       >
         {value.format(locale.yearFormat)}
@@ -135,16 +135,16 @@ export default class CalendarHeader extends React.Component {
 
   showMonthPanel = () => {
     // null means that users' interaction doesn't change value
-    this.props.onPanelChange(null, "month");
+    this.props.onPanelChange(null, 'month');
   };
 
   showYearPanel = referer => {
     this.setState({ yearPanelReferer: referer });
-    this.props.onPanelChange(null, "year");
+    this.props.onPanelChange(null, 'year');
   };
 
   showDecadePanel = () => {
-    this.props.onPanelChange(null, "decade");
+    this.props.onPanelChange(null, 'decade');
   };
 
   render() {
@@ -158,18 +158,18 @@ export default class CalendarHeader extends React.Component {
       enableNext,
       enablePrev,
       disabledMonth,
-      renderFooter
+      renderFooter,
     } = props;
 
     let panel = null;
-    if (mode === "month") {
+    if (mode === 'month') {
       panel = (
         <MonthPanel
           locale={locale}
           value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
-          onYearPanelShow={() => this.showYearPanel("month")}
+          onYearPanelShow={() => this.showYearPanel('month')}
           disabledDate={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
@@ -178,7 +178,7 @@ export default class CalendarHeader extends React.Component {
         />
       );
     }
-    if (mode === "year") {
+    if (mode === 'year') {
       panel = (
         <YearPanel
           locale={locale}
@@ -190,7 +190,7 @@ export default class CalendarHeader extends React.Component {
         />
       );
     }
-    if (mode === "decade") {
+    if (mode === 'decade') {
       panel = (
         <DecadePanel
           locale={locale}
@@ -204,7 +204,7 @@ export default class CalendarHeader extends React.Component {
 
     return (
       <div className={`${prefixCls}-header`}>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: 'relative' }}>
           {showIf(
             enablePrev && !showTimePicker,
             <a

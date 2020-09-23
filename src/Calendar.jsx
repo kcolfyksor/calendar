@@ -1,24 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import KeyCode from "rc-util/lib/KeyCode";
-import { polyfill } from "react-lifecycles-compat";
-import DateTable from "./date/DateTable";
-import CalendarHeader from "./calendar/CalendarHeader";
-import CalendarFooter from "./calendar/CalendarFooter";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import KeyCode from 'rc-util/lib/KeyCode';
+import { polyfill } from 'react-lifecycles-compat';
+import DateTable from './date/DateTable';
+import CalendarHeader from './calendar/CalendarHeader';
+import CalendarFooter from './calendar/CalendarFooter';
 import {
   calendarMixinWrapper,
   calendarMixinPropTypes,
   calendarMixinDefaultProps,
-  getNowByCurrentStateValue
-} from "./mixin/CalendarMixin";
-import { commonMixinWrapper, propType, defaultProp } from "./mixin/CommonMixin";
-import DateInput from "./date/DateInput";
-import { getTimeConfig, getTodayTime, syncTime } from "./util";
-import { goStartMonth, goEndMonth, goTime } from "./util/toTime";
-import moment from "moment";
+  getNowByCurrentStateValue,
+} from './mixin/CalendarMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import DateInput from './date/DateInput';
+import { getTimeConfig, getTodayTime, syncTime } from './util';
+import { goStartMonth, goEndMonth, goTime } from './util/toTime';
+import moment from 'moment';
 
-function noop() {}
+function noop() { }
 
 const getMomentObjectIfValid = date => {
   if (moment.isMoment(date) && date.isValid()) {
@@ -38,7 +38,7 @@ class Calendar extends React.Component {
     value: PropTypes.object,
     selectedValue: PropTypes.object,
     defaultSelectedValue: PropTypes.object,
-    mode: PropTypes.oneOf(["time", "date", "month", "year", "decade"]),
+    mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
     showDateInput: PropTypes.bool,
     showWeekNumber: PropTypes.bool,
@@ -60,7 +60,7 @@ class Calendar extends React.Component {
     clearIcon: PropTypes.node,
     focusablePanel: PropTypes.bool,
     inputMode: PropTypes.string,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
   };
 
   static defaultProps = {
@@ -71,18 +71,18 @@ class Calendar extends React.Component {
     timePicker: null,
     onOk: noop,
     onPanelChange: noop,
-    focusablePanel: true
+    focusablePanel: true,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      mode: this.props.mode || "date",
+      mode: this.props.mode || 'date',
       value:
         getMomentObjectIfValid(props.value) ||
         getMomentObjectIfValid(props.defaultValue) ||
         moment(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   }
 
@@ -94,14 +94,14 @@ class Calendar extends React.Component {
 
   onPanelChange = (value, mode) => {
     const { props, state } = this;
-    if (!("mode" in props)) {
+    if (!('mode' in props)) {
       this.setState({ mode });
     }
     props.onPanelChange(value || state.value, mode);
   };
 
   onKeyDown = event => {
-    if (event.target.nodeName.toLowerCase() === "input") {
+    if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
     }
     const keyCode = event.keyCode;
@@ -111,26 +111,26 @@ class Calendar extends React.Component {
     const { value } = this.state;
     switch (keyCode) {
       case KeyCode.DOWN:
-        this.goTime(1, "weeks");
+        this.goTime(1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.UP:
-        this.goTime(-1, "weeks");
+        this.goTime(-1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.LEFT:
         if (ctrlKey) {
-          this.goTime(-1, "years");
+          this.goTime(-1, 'years');
         } else {
-          this.goTime(-1, "days");
+          this.goTime(-1, 'days');
         }
         event.preventDefault();
         return 1;
       case KeyCode.RIGHT:
         if (ctrlKey) {
-          this.goTime(1, "years");
+          this.goTime(1, 'years');
         } else {
-          this.goTime(1, "days");
+          this.goTime(1, 'days');
         }
         event.preventDefault();
         return 1;
@@ -143,17 +143,17 @@ class Calendar extends React.Component {
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_DOWN:
-        this.goTime(1, "month");
+        this.goTime(1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_UP:
-        this.goTime(-1, "month");
+        this.goTime(-1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.ENTER:
         if (!disabledDate || !disabledDate(value)) {
           this.onSelect(value, {
-            source: "keyboard"
+            source: 'keyboard',
           });
         }
         event.preventDefault();
@@ -178,13 +178,13 @@ class Calendar extends React.Component {
 
   onDateInputChange = value => {
     this.onSelect(value, {
-      source: "dateInput"
+      source: 'dateInput',
     });
   };
 
   onDateInputSelect = value => {
     this.onSelect(value, {
-      source: "dateInputSelect"
+      source: 'dateInputSelect',
     });
   };
 
@@ -204,7 +204,7 @@ class Calendar extends React.Component {
     const { value } = this.state;
     const now = getTodayTime(value);
     this.onSelect(now, {
-      source: "todayButton"
+      source: 'todayButton',
     });
   };
 
@@ -232,16 +232,16 @@ class Calendar extends React.Component {
     const { value, selectedValue } = nextProps;
     let newState = {};
 
-    if ("mode" in nextProps && state.mode !== nextProps.mode) {
+    if ('mode' in nextProps && state.mode !== nextProps.mode) {
       newState = { mode: nextProps.mode };
     }
-    if ("value" in nextProps) {
+    if ('value' in nextProps) {
       newState.value =
         getMomentObjectIfValid(value) ||
         getMomentObjectIfValid(nextProps.defaultValue) ||
         getNowByCurrentStateValue(state.value);
     }
-    if ("selectedValue" in nextProps) {
+    if ('selectedValue' in nextProps) {
       newState.selectedValue = selectedValue;
     }
 
@@ -253,11 +253,11 @@ class Calendar extends React.Component {
   };
 
   openTimePicker = () => {
-    this.onPanelChange(null, "time");
+    this.onPanelChange(null, 'time');
   };
 
   closeTimePicker = () => {
-    this.onPanelChange(null, "date");
+    this.onPanelChange(null, 'date');
   };
 
   goTime = (direction, unit) => {
@@ -277,10 +277,10 @@ class Calendar extends React.Component {
       renderFooter,
       inputMode,
       monthCellRender,
-      monthCellContentRender
+      monthCellContentRender,
     } = props;
     const { value, selectedValue, mode } = state;
-    const showTimePicker = mode === "time";
+    const showTimePicker = mode === 'time';
     const disabledTimeConfig =
       showTimePicker && disabledTime && timePicker
         ? getTimeConfig(selectedValue, disabledTime)
@@ -297,7 +297,7 @@ class Calendar extends React.Component {
         ...disabledTimeConfig,
         onChange: this.onDateInputChange,
         value: selectedValue,
-        disabledTime
+        disabledTime,
       };
 
       if (timePicker.props.defaultValue !== undefined) {
@@ -401,7 +401,7 @@ class Calendar extends React.Component {
 
     return this.renderRoot({
       children,
-      className: props.showWeekNumber ? `${prefixCls}-week-number` : ""
+      className: props.showWeekNumber ? `${prefixCls}-week-number` : '',
     });
   }
 }

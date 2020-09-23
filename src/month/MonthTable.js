@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import { polyfill } from "react-lifecycles-compat";
-import { getTodayTime, getMonthName } from "../util/index";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { polyfill } from 'react-lifecycles-compat';
+import { getTodayTime, getMonthName } from '../util/index';
 
 const ROW = 4;
 const COL = 3;
 
-function noop() {}
+function noop() { }
 
 class MonthTable extends Component {
   state = {};
 
   static getDerivedStateFromProps(props) {
-    if ("value" in props) {
+    if ('value' in props) {
       return { value: props.value };
     }
     return null;
@@ -21,7 +21,7 @@ class MonthTable extends Component {
 
   setAndSelectValue(value) {
     this.setState({
-      value
+      value,
     });
     this.props.onSelect(value);
   }
@@ -45,7 +45,7 @@ class MonthTable extends Component {
         months[rowIndex][colIndex] = {
           value: index,
           content,
-          title: content
+          title: content,
         };
         index++;
       }
@@ -73,7 +73,7 @@ class MonthTable extends Component {
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
           [`${prefixCls}-current-cell`]:
-            today.year() === value.year() && monthData.value === today.month()
+            today.year() === value.year() && monthData.value === today.month(),
         };
         let cellEl;
         if (cellRender) {
@@ -119,14 +119,14 @@ class MonthTable extends Component {
 }
 
 MonthTable.defaultProps = {
-  onSelect: noop
+  onSelect: noop,
 };
 
 MonthTable.propTypes = {
   onSelect: PropTypes.func,
   cellRender: PropTypes.func,
   prefixCls: PropTypes.string,
-  value: PropTypes.object
+  value: PropTypes.object,
 };
 
 polyfill(MonthTable);

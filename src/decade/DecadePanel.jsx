@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 const ROW = 4;
 const COL = 3;
-import classnames from "classnames";
+import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.add(direction, "years");
+  next.add(direction, 'years');
   this.setState({
-    value: next
+    value: next,
   });
 }
 
@@ -24,7 +24,7 @@ export default class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value || props.defaultValue
+      value: props.value || props.defaultValue,
     };
 
     // bind methods
@@ -51,13 +51,13 @@ export default class DecadePanel extends React.Component {
         const endDecade = preYear + index * 10 + 9;
         decades[rowIndex][colIndex] = {
           startDecade,
-          endDecade
+          endDecade,
         };
         index++;
       }
     }
 
-    const footer = renderFooter && renderFooter("decade");
+    const footer = renderFooter && renderFooter('decade');
 
     const decadesEls = decades.map((row, decadeIndex) => {
       const tds = row.map(decadeData => {
@@ -70,7 +70,7 @@ export default class DecadePanel extends React.Component {
           [`${prefixCls}-selected-cell`]:
             dStartDecade <= currentYear && currentYear <= dEndDecade,
           [`${prefixCls}-last-century-cell`]: isLast,
-          [`${prefixCls}-next-century-cell`]: isNext
+          [`${prefixCls}-next-century-cell`]: isNext,
         };
         const content = `${dStartDecade}-${dEndDecade}`;
         let clickHandler;
@@ -136,9 +136,9 @@ DecadePanel.propTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
-  renderFooter: PropTypes.func
+  renderFooter: PropTypes.func,
 };
 
 DecadePanel.defaultProps = {
-  onSelect() {}
+  onSelect() { },
 };

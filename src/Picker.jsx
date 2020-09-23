@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import { polyfill } from "react-lifecycles-compat";
-import createChainedFunction from "rc-util/lib/createChainedFunction";
-import KeyCode from "rc-util/lib/KeyCode";
-import placements from "./picker/placements";
-import Trigger from "rc-trigger";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
+import createChainedFunction from 'rc-util/lib/createChainedFunction';
+import KeyCode from 'rc-util/lib/KeyCode';
+import placements from './picker/placements';
+import Trigger from 'rc-trigger';
 
-function noop() {}
+function noop() { }
 
 function refFn(field, component) {
   this[field] = component;
@@ -32,35 +32,35 @@ class Picker extends React.Component {
     defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     align: PropTypes.object,
     dateRender: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
   };
 
   static defaultProps = {
-    prefixCls: "rc-calendar-picker",
+    prefixCls: 'rc-calendar-picker',
     style: {},
     align: {},
-    placement: "bottomLeft",
+    placement: 'bottomLeft',
     defaultOpen: false,
     onChange: noop,
     onOpenChange: noop,
-    onBlur: noop
+    onBlur: noop,
   };
 
   constructor(props) {
     super(props);
 
     let open;
-    if ("open" in props) {
+    if ('open' in props) {
       open = props.open;
     } else {
       open = props.defaultOpen;
     }
     const value = props.value || props.defaultValue;
-    this.saveCalendarRef = refFn.bind(this, "calendarInstance");
+    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
 
     this.state = {
       open,
-      value
+      value,
     };
   }
 
@@ -84,16 +84,16 @@ class Picker extends React.Component {
 
   onCalendarSelect = (value, cause = {}) => {
     const props = this.props;
-    if (!("value" in props)) {
+    if (!('value' in props)) {
       this.setState({
-        value
+        value,
       });
     }
     if (
-      cause.source === "keyboard" ||
-      cause.source === "dateInputSelect" ||
-      (!props.calendar.props.timePicker && cause.source !== "dateInput") ||
-      cause.source === "todayButton"
+      cause.source === 'keyboard' ||
+      cause.source === 'dateInputSelect' ||
+      (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
+      cause.source === 'todayButton'
     ) {
       this.close(this.focus);
     }
@@ -129,7 +129,7 @@ class Picker extends React.Component {
   static getDerivedStateFromProps(nextProps) {
     const newState = {};
     const { value, open } = nextProps;
-    if ("value" in nextProps) {
+    if ('value' in nextProps) {
       newState.value = value;
     }
     if (open !== undefined) {
@@ -158,7 +158,7 @@ class Picker extends React.Component {
         calendarProps.onClear,
         this.onCalendarClear
       ),
-      onBlur: createChainedFunction(calendarProps.onBlur, this.onCalendarBlur)
+      onBlur: createChainedFunction(calendarProps.onBlur, this.onCalendarBlur),
     };
 
     return React.cloneElement(props.calendar, extraProps);
@@ -167,10 +167,10 @@ class Picker extends React.Component {
   setOpen = (open, callback) => {
     const { onOpenChange } = this.props;
     if (this.state.open !== open) {
-      if (!("open" in this.props)) {
+      if (!('open' in this.props)) {
         this.setState(
           {
-            open
+            open,
           },
           callback
         );
@@ -211,7 +211,7 @@ class Picker extends React.Component {
       disabled,
       dropdownClassName,
       transitionName,
-      children
+      children,
     } = props;
     const state = this.state;
     return (
@@ -220,7 +220,7 @@ class Picker extends React.Component {
         popupAlign={align}
         builtinPlacements={placements}
         popupPlacement={placement}
-        action={disabled && !state.open ? [] : ["click"]}
+        action={disabled && !state.open ? [] : ['click']}
         destroyPopupOnHide
         getPopupContainer={getCalendarContainer}
         popupStyle={style}
@@ -232,7 +232,7 @@ class Picker extends React.Component {
         popupClassName={dropdownClassName}
       >
         {React.cloneElement(children(state, props), {
-          onKeyDown: this.onKeyDown
+          onKeyDown: this.onKeyDown,
         })}
       </Trigger>
     );
