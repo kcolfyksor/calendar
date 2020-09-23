@@ -67,7 +67,7 @@ class FullCalendar extends React.Component {
 
   onMonthSelect = value => {
     this.onSelect(value, {
-      target: 'month'
+      target: 'month',
     });
   };
 

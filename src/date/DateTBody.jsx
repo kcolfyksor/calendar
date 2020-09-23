@@ -5,7 +5,7 @@ import DateConstants from './DateConstants';
 import { getTitleString, getTodayTime } from '../util/';
 
 function isSameDay(one, two) {
-  return one && two && one.isSame(two, "day");
+  return one && two && one.isSame(two, 'day');
 }
 
 function beforeCurrentMonthYear(current, today) {

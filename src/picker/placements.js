@@ -29,7 +29,7 @@ const placements = {
     overflow: autoAdjustOverflow,
     offset: [0, 3],
     targetOffset,
-  }
+  },
 };
 
 export default placements;
